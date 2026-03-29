@@ -5,7 +5,10 @@
 
 # Dist
 node_modules
-dist/
+dist
+lib
+build
+coverage
 
 # Profile
 .rspack-profile-*/

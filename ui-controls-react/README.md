@@ -1,6 +1,6 @@
-# react-ui-common-controls
+# ui-controls
 
-This is a UI library created on the design language of bootstrap and Microsoft fluent UI
+This is an UI controls library created on the design language of bootstrap and Microsoft fluent UI
 
 This is built on top of Bootstrap and Fluent UI React which is a collection of robust components designed to make it simple for you to create consistent web experiences using the Fluent Design Language.
 For information, see the [Fluent UI](https://fluent2.microsoft.design).
@@ -12,7 +12,7 @@ This library has reusable composite controls which will help creating rich UI ea
 The package can be installed as an npm package using the following command:
 
 ```
- npm install --save react-ui-common-controls@latest
+ npm install --save @ui-controls/react@latest
 ```
 
 ## Components
@@ -24,7 +24,7 @@ For detailed release notes, please refer to our [version history](docs/ReleaseNo
 
 ## Code Repository
 
-https://github.com/applicationsuite/react-ui-common-controls
+https://github.com/applicationsuite/ui-controls/ui-controls-react
 
 ## Authors and Contributors
 
