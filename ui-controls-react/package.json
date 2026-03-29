@@ -2,7 +2,7 @@
   "name": "ui-controls-react",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "scripts": {
     "clean": "rimraf lib",
     "build": "npm run clean && tsc -p tsconfig.prod.json",
