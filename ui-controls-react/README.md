@@ -1,4 +1,4 @@
-# ui-controls
+# ui-controls-react
 
 This is an UI controls library created on the design language of bootstrap and Microsoft fluent UI
 
@@ -12,7 +12,7 @@ This library has reusable composite controls which will help creating rich UI ea
 The package can be installed as an npm package using the following command:
 
 ```
- npm install --save @ui-controls/react@latest
+ npm install --save @ui-controls-react@latest
 ```
 
 ## Components
