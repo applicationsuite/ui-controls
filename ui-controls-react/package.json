@@ -2,7 +2,7 @@
   "name": "ui-controls-react",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "clean": "rimraf lib",
     "build": "npm run clean && tsc -p tsconfig.prod.json",
@@ -28,5 +28,22 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/applicationsuite/ui-controls.git"
+  },
+  "keywords": [
+    "ui-controls",
+    "react-ui-controls",
+    "ui-controls-react",
+    "react-fluent-ui-controls",
+    "react-ui-common-controls",
+    "react-common-ui-controls",
+    "fluentui",
+    "fluent-ui",
+    "fluent-ui-controls",
+    "fluent-ui-common-controls",
+    "react-fluent-ui-controls"
+  ]
 }
