@@ -24,7 +24,7 @@ For detailed release notes, please refer to our [version history](docs/ReleaseNo
 
 ## Code Repository
 
-https://github.com/applicationsuite/ui-controls/ui-controls-react
+https://github.com/applicationsuite/ui-controls/
 
 ## Authors and Contributors
 
