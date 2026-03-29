@@ -12,7 +12,7 @@ This library has reusable composite controls which will help creating rich UI ea
 The package can be installed as an npm package using the following command:
 
 ```
- npm install --save @ui-controls-react@latest
+ npm install --save ui-controls-react@latest
 ```
 
 ## Components
