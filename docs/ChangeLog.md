@@ -8,25 +8,28 @@ All notable changes to `@techtrips/ui-controls` are documented here. The format 
 
 | Version | Date | Highlights |
 |---------|------|------------|
-| [0.1.1](#011--2026-04-30) | 2026-04-30 | - |
+| [0.1.1](#011--2026-05-01) | 2026-05-01 | Adapter source moved out of the bundle into `examples/adapters/`; per-control docs split into `docs/DataGrid.md`; new `docs/Adapters.md` guide |
 | [0.1.0](#010--2026-05-01) | 2026-05-01 | Initial release: DataGrid with full plugin pipeline, column visibility, theming, and adapters |
 
 
 ---
 
-## [0.1.1] — 2026-04-30
+## [0.1.1] — 2026-05-01
 
 ### Added
 
-- _Update this section before publishing_
+- **Per-control docs** — README now exposes a Components / Guides table that links out to dedicated pages. New [`docs/DataGrid.md`](DataGrid.md) holds the full DataGrid usage, default plugins, action-bar layout, column flags, and theming.
+- **Adapters guide** — new [`docs/Adapters.md`](Adapters.md) documents the `IDataGridAdapter` slot contract and how to copy a reference adapter into your app.
+- **Reference adapters folder** — `examples/adapters/` with `fluent-adapter.tsx`, `mui-adapter.tsx`, `material-like-adapter.tsx` (+ `material-like.css`) and a copy-paste README.
 
 ### Changed
 
-- _Update this section before publishing_
+- **Adapter source no longer ships in the bundle.** The Fluent / MUI / material-like adapters moved from `src/playground/adapters/` to top-level `examples/adapters/`, are excluded from `tsconfig.prod.json`, and are not listed in `package.json` `files` or `exports`. Consumers copy whichever adapter they want into their own app.
+- Adapter example files import from the published package name (`@techtrips/ui-controls`) so they're paste-ready; the playground keeps working via a `tsconfig` path + `rspack.config` `resolve.alias`.
 
 ### Fixed
 
-- _Update this section before publishing_
+- _No fixes in this release._
 
 ---
 

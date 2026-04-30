@@ -94,6 +94,6 @@
 		"techtrips-react-ui-controls"
 	],
 	"license": "MIT",
-	"author": "techtrips",
+	"author": "TechTrips",
 	"description": "A React composite UI controls library — DataGrid and more, headless core with opt-in plugins"
 }
