@@ -1,6 +1,6 @@
 # @techtrips/ui-controls
 
-![version](https://img.shields.io/badge/version-0.1.0-blue)
+![version](https://img.shields.io/badge/version-0.1.1-blue)
 
 A React composite UI controls library. Headless core with opt-in plugins so each big feature stays tree-shakeable and the bundle stays small.
 

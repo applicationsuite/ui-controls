@@ -8,8 +8,25 @@ All notable changes to `@techtrips/ui-controls` are documented here. The format 
 
 | Version | Date | Highlights |
 |---------|------|------------|
+| [0.1.1](#011--2026-04-30) | 2026-04-30 | - |
 | [0.1.0](#010--2026-05-01) | 2026-05-01 | Initial release: DataGrid with full plugin pipeline, column visibility, theming, and adapters |
 
+
+---
+
+## [0.1.1] — 2026-04-30
+
+### Added
+
+- _Update this section before publishing_
+
+### Changed
+
+- _Update this section before publishing_
+
+### Fixed
+
+- _Update this section before publishing_
 
 ---
 
