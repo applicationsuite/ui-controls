@@ -6,9 +6,9 @@
 # Dist
 node_modules
 dist
+lib
 build
 coverage
-ui-controls-react/lib/*
 
 # Profile
 .rspack-profile-*/

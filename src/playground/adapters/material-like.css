@@ -1,0 +1,244 @@
+/* Tiny Material-ish skin for the playground adapter demo. */
+
+.mat-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	border: none;
+	border-radius: 4px;
+	padding: 6px 14px;
+	font-size: 13px;
+	font-weight: 500;
+	letter-spacing: 0.4px;
+	text-transform: uppercase;
+	background: #1976d2;
+	color: #fff;
+	cursor: pointer;
+	box-shadow:
+		0 1px 1px rgba(0, 0, 0, 0.14),
+		0 2px 1px rgba(0, 0, 0, 0.12);
+	transition: background 120ms ease;
+}
+
+.mat-btn:hover:not(:disabled) {
+	background: #1565c0;
+}
+
+.mat-btn:disabled {
+	background: rgba(0, 0, 0, 0.12);
+	color: rgba(0, 0, 0, 0.26);
+	cursor: not-allowed;
+	box-shadow: none;
+}
+
+.mat-btn--subtle {
+	background: transparent;
+	color: #1976d2;
+	box-shadow: none;
+}
+
+.mat-btn--subtle:hover:not(:disabled) {
+	background: rgba(25, 118, 210, 0.08);
+}
+
+.mat-btn--primary {
+	background: #1565c0;
+}
+
+.mat-btn--active {
+	outline: 2px solid #1976d2;
+	outline-offset: 1px;
+}
+
+.mat-icon-btn {
+	border: none;
+	background: transparent;
+	color: #1976d2;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.mat-icon-btn:hover:not(:disabled) {
+	background: rgba(25, 118, 210, 0.08);
+}
+
+.mat-input-wrap {
+	display: inline-flex;
+	position: relative;
+}
+
+.mat-input {
+	border: none;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+	padding: 6px 0;
+	background: transparent;
+	font-size: 13px;
+	min-width: 220px;
+	outline: none;
+	transition: border-color 120ms ease;
+}
+
+.mat-input:focus {
+	border-bottom: 2px solid #1976d2;
+	padding-bottom: 5px;
+}
+
+.mat-select-wrap {
+	display: inline-flex;
+}
+
+.mat-select {
+	border: none;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+	background: transparent;
+	font-size: 13px;
+	padding: 4px 16px 4px 4px;
+	outline: none;
+}
+
+.mat-select:focus {
+	border-bottom: 2px solid #1976d2;
+}
+
+.mat-checkbox {
+	accent-color: #1976d2;
+	width: 16px;
+	height: 16px;
+}
+
+/* ---- icon ---- */
+.mat-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 1em;
+	font-size: 14px;
+	line-height: 1;
+	color: currentColor;
+}
+
+/* ---- tag / chip ---- */
+.mat-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 2px 4px 2px 10px;
+	border-radius: 16px;
+	background: #e0e0e0;
+	color: #1f1f1f;
+	font-size: 12px;
+	line-height: 1.6;
+}
+.mat-chip-close {
+	all: unset;
+	cursor: pointer;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.18);
+	color: #fff;
+	font-size: 12px;
+}
+.mat-chip-close:hover {
+	background: rgba(0, 0, 0, 0.32);
+}
+
+/* ---- spinner ---- */
+.mat-spinner {
+	display: inline-block;
+	border: 2px solid rgba(98, 0, 238, 0.18);
+	border-top-color: #6200ee;
+	border-radius: 50%;
+	animation: mat-spin 0.8s linear infinite;
+}
+@keyframes mat-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* ---- popover ---- */
+.mat-popover-backdrop {
+	position: fixed;
+	inset: 0;
+	z-index: 40;
+}
+.mat-popover {
+	position: absolute;
+	z-index: 41;
+	min-width: 220px;
+	padding: 12px;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow:
+		0 5px 5px -3px rgba(0, 0, 0, 0.2),
+		0 8px 10px 1px rgba(0, 0, 0, 0.14),
+		0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+/* ---- drawer ---- */
+.mat-drawer-backdrop {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.32);
+	z-index: 50;
+}
+.mat-drawer {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	width: min(420px, 92vw);
+	background: #fff;
+	box-shadow: -8px 0 24px rgba(0, 0, 0, 0.18);
+	display: flex;
+	flex-direction: column;
+	z-index: 51;
+}
+.mat-drawer--right {
+	right: 0;
+}
+.mat-drawer--left {
+	left: 0;
+	box-shadow: 8px 0 24px rgba(0, 0, 0, 0.18);
+}
+.mat-drawer-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 16px;
+	border-bottom: 1px solid #e0e0e0;
+}
+.mat-drawer-head h3 {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 500;
+}
+.mat-drawer-body {
+	flex: 1;
+	overflow: auto;
+	padding: 12px 16px;
+}
+.mat-drawer-foot {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 16px;
+	border-top: 1px solid #e0e0e0;
+}
+.mat-drawer-foot .dgv-spacer {
+	flex: 1;
+}
+
+/* ---- label ---- */
+.mat-label {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 13px;
+	color: #1f1f1f;
+}

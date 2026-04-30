@@ -1,0 +1,37 @@
+/* Material-flavoured theme — maps `--dgv-*` tokens onto values close to
+ * Material Design 3 light defaults. Pair with the `mui` adapter in the
+ * playground for a full MUI-aligned look. */
+
+[data-dgv-theme="material"] {
+	--dgv-color-bg: #ffffff;
+	--dgv-color-bg-alt: #f5f5f5;
+	--dgv-color-bg-hover: rgba(98, 0, 238, 0.04);
+	--dgv-color-bg-selected: rgba(98, 0, 238, 0.08);
+	--dgv-color-bg-overlay: rgba(0, 0, 0, 0.5);
+
+	--dgv-color-fg: #1c1b1f;
+	--dgv-color-fg-muted: #49454f;
+	--dgv-color-fg-on-accent: #ffffff;
+
+	--dgv-color-border: #e0e0e0;
+	--dgv-color-accent: #6200ee;
+	--dgv-color-accent-hover: #3700b3;
+
+	--dgv-radius-sm: 4px;
+	--dgv-radius-md: 8px;
+	--dgv-radius-pill: 999px;
+
+	--dgv-row-height: 40px;
+	--dgv-control-height: 36px;
+
+	--dgv-font-family:
+		"Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+		Arial, sans-serif;
+	--dgv-font-size-sm: 12px;
+	--dgv-font-size-md: 14px;
+
+	--dgv-shadow-popover:
+		0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+		0 3px 14px 2px rgba(0, 0, 0, 0.12);
+	--dgv-shadow-drawer: -8px 0 24px rgba(0, 0, 0, 0.18);
+}

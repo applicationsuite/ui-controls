@@ -1,0 +1,22 @@
+/* Light theme — explicit selector. Same as the defaults in DataGrid.styles.css.
+ * Useful when a parent has set `data-dgv-theme="dark"` and you want a child
+ * subtree back to light. */
+
+[data-dgv-theme="light"] {
+	--dgv-color-bg: #ffffff;
+	--dgv-color-bg-alt: #fafafa;
+	--dgv-color-bg-hover: #f3f3f3;
+	--dgv-color-bg-selected: #e5f1fb;
+	--dgv-color-bg-overlay: rgba(0, 0, 0, 0.32);
+
+	--dgv-color-fg: #242424;
+	--dgv-color-fg-muted: #616161;
+	--dgv-color-fg-on-accent: #ffffff;
+
+	--dgv-color-border: #e1e1e1;
+	--dgv-color-accent: #0f6cbd;
+	--dgv-color-accent-hover: #115ea3;
+
+	--dgv-shadow-popover: 0 4px 12px rgba(0, 0, 0, 0.08);
+	--dgv-shadow-drawer: -4px 0 16px rgba(0, 0, 0, 0.12);
+}

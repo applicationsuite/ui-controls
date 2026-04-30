@@ -1,0 +1,9 @@
+/* All built-in themes. Import this single file to enable every theme
+ * (`light`, `dark`, `auto`, `fluent`, `material`) and switch between them
+ * by changing `data-dgv-theme` on the grid root or any ancestor. */
+
+@import "./light.css";
+@import "./dark.css";
+@import "./auto.css";
+@import "./fluent.css";
+@import "./material.css";

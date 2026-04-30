@@ -1,0 +1,69 @@
+/* Material-flavoured theme.
+ *
+ * When the consumer uses MUI's CSS-variables theme (createTheme + CssVarsProvider,
+ * or Material UI v6+ default), MUI publishes `--mui-palette-*` custom properties
+ * onto the DOM. Each value below resolves to the matching MUI variable first,
+ * with a Material 3 light literal as a fallback so the theme also works
+ * standalone.
+ *
+ * If you switch MUI to a dark or branded theme, the grid follows automatically.
+ */
+
+[data-dgv-theme="material"] {
+	/* Surfaces */
+	--dgv-color-bg: var(--mui-palette-background-paper, #ffffff);
+	--dgv-color-bg-alt: var(--mui-palette-background-default, #f5f5f5);
+	--dgv-color-bg-hover: var(
+		--mui-palette-action-hover,
+		rgba(98, 0, 238, 0.04)
+	);
+	--dgv-color-bg-selected: var(
+		--mui-palette-action-selected,
+		rgba(98, 0, 238, 0.08)
+	);
+	--dgv-color-bg-overlay: rgba(0, 0, 0, 0.5);
+
+	/* Text */
+	--dgv-color-fg: var(--mui-palette-text-primary, #1c1b1f);
+	--dgv-color-fg-muted: var(--mui-palette-text-secondary, #49454f);
+	--dgv-color-fg-on-accent: var(--mui-palette-primary-contrastText, #ffffff);
+
+	/* Border + accent */
+	--dgv-color-border: var(--mui-palette-divider, #e0e0e0);
+	--dgv-color-accent: var(--mui-palette-primary-main, #6200ee);
+	--dgv-color-accent-hover: var(--mui-palette-primary-dark, #3700b3);
+
+	/* Shape */
+	--dgv-radius-sm: var(--mui-shape-borderRadius, 4px);
+	--dgv-radius-md: 8px;
+	--dgv-radius-pill: 999px;
+
+	--dgv-row-height: 40px;
+	--dgv-control-height: 36px;
+
+	/* Type */
+	--dgv-font-family: var(
+		--mui-typography-fontFamily,
+		"Roboto",
+		system-ui,
+		-apple-system,
+		BlinkMacSystemFont,
+		"Helvetica Neue",
+		Arial,
+		sans-serif
+	);
+	--dgv-font-size-sm: 12px;
+	--dgv-font-size-md: 14px;
+
+	/* Elevation */
+	--dgv-shadow-popover: var(
+		--mui-shadows-8,
+		0 5px 5px -3px rgba(0, 0, 0, 0.2),
+		0 8px 10px 1px rgba(0, 0, 0, 0.14),
+		0 3px 14px 2px rgba(0, 0, 0, 0.12)
+	);
+	--dgv-shadow-drawer: var(
+		--mui-shadows-16,
+		-8px 0 24px rgba(0, 0, 0, 0.18)
+	);
+}

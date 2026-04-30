@@ -1,0 +1,45 @@
+/* Auto theme: follows the user's OS color-scheme preference. Apply with
+ * data-dgv-theme="auto". Light tokens for `prefers-color-scheme: light`,
+ * dark tokens for `prefers-color-scheme: dark`. */
+
+@media (prefers-color-scheme: light) {
+	[data-dgv-theme="auto"] {
+		--dgv-color-bg: #ffffff;
+		--dgv-color-bg-alt: #fafafa;
+		--dgv-color-bg-hover: #f3f3f3;
+		--dgv-color-bg-selected: #e5f1fb;
+		--dgv-color-bg-overlay: rgba(0, 0, 0, 0.32);
+
+		--dgv-color-fg: #242424;
+		--dgv-color-fg-muted: #616161;
+		--dgv-color-fg-on-accent: #ffffff;
+
+		--dgv-color-border: #e1e1e1;
+		--dgv-color-accent: #0f6cbd;
+		--dgv-color-accent-hover: #115ea3;
+
+		--dgv-shadow-popover: 0 4px 12px rgba(0, 0, 0, 0.08);
+		--dgv-shadow-drawer: -4px 0 16px rgba(0, 0, 0, 0.12);
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	[data-dgv-theme="auto"] {
+		--dgv-color-bg: #1f1f1f;
+		--dgv-color-bg-alt: #292929;
+		--dgv-color-bg-hover: #333333;
+		--dgv-color-bg-selected: #094771;
+		--dgv-color-bg-overlay: rgba(0, 0, 0, 0.6);
+
+		--dgv-color-fg: #f5f5f5;
+		--dgv-color-fg-muted: #a6a6a6;
+		--dgv-color-fg-on-accent: #ffffff;
+
+		--dgv-color-border: #3a3a3a;
+		--dgv-color-accent: #4f9bff;
+		--dgv-color-accent-hover: #2b88f5;
+
+		--dgv-shadow-popover: 0 4px 12px rgba(0, 0, 0, 0.5);
+		--dgv-shadow-drawer: -4px 0 16px rgba(0, 0, 0, 0.55);
+	}
+}

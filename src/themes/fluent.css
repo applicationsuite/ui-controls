@@ -1,0 +1,60 @@
+/* Fluent-flavoured theme.
+ *
+ * This file is "live" — when the consumer wraps the page with
+ * <FluentProvider theme={webLightTheme | webDarkTheme | ...}> the grid
+ * follows that Fluent theme automatically because every value below
+ * resolves first to the matching Fluent CSS variable (defined by
+ * FluentProvider on the DOM) and falls back to a literal only when
+ * Fluent isn't present.
+ *
+ * The variable names below come from @fluentui/tokens. They are emitted
+ * by FluentProvider as plain CSS custom properties so they cascade
+ * exactly like our own.
+ */
+
+[data-dgv-theme="fluent"] {
+	/* Surfaces */
+	--dgv-color-bg: var(--colorNeutralBackground1, #ffffff);
+	--dgv-color-bg-alt: var(--colorNeutralBackground2, #f5f5f5);
+	--dgv-color-bg-hover: var(--colorNeutralBackground1Hover, #ebebeb);
+	--dgv-color-bg-selected: var(--colorNeutralBackground1Selected, #ebf3fc);
+	--dgv-color-bg-overlay: var(--colorBackgroundOverlay, rgba(0, 0, 0, 0.4));
+
+	/* Text */
+	--dgv-color-fg: var(--colorNeutralForeground1, #242424);
+	--dgv-color-fg-muted: var(--colorNeutralForeground3, #616161);
+	--dgv-color-fg-on-accent: var(--colorNeutralForegroundOnBrand, #ffffff);
+
+	/* Border + accent */
+	--dgv-color-border: var(--colorNeutralStroke1, #d1d1d1);
+	--dgv-color-accent: var(--colorBrandBackground, #0f6cbd);
+	--dgv-color-accent-hover: var(--colorBrandBackgroundHover, #115ea3);
+
+	/* Shape */
+	--dgv-radius-sm: var(--borderRadiusSmall, 2px);
+	--dgv-radius-md: var(--borderRadiusMedium, 4px);
+
+	--dgv-row-height: 32px;
+	--dgv-control-height: 32px;
+
+	/* Type */
+	--dgv-font-family: var(
+		--fontFamilyBase,
+		"Segoe UI",
+		"Segoe UI Web (West European)",
+		-apple-system,
+		BlinkMacSystemFont,
+		system-ui,
+		sans-serif
+	);
+	--dgv-font-size-sm: var(--fontSizeBase200, 12px);
+	--dgv-font-size-md: var(--fontSizeBase300, 14px);
+
+	/* Elevation */
+	--dgv-shadow-popover: var(
+		--shadow16,
+		0 8px 16px rgba(0, 0, 0, 0.14),
+		0 0 2px rgba(0, 0, 0, 0.12)
+	);
+	--dgv-shadow-drawer: var(--shadow28, -8px 0 16px rgba(0, 0, 0, 0.14));
+}

@@ -1,0 +1,1121 @@
+/* DataGrid base styles - zero-dependency, design-token friendly via CSS variables.
+ *
+ * Theming contract
+ * ----------------
+ * The grid reads its appearance from `--dgv-*` custom properties. Defaults
+ * below describe a neutral light theme. To apply a theme:
+ *
+ *   1. Set `data-dgv-theme="dark|fluent|material|..."` on the grid root or
+ *      any ancestor (e.g. <html>, <body>, a wrapper div). The DataGrid
+ *      component accepts a `theme` prop that does this for you.
+ *   2. Or import a stylesheet from `themes/` (e.g. `themes/dark.css`).
+ *   3. Or override any of the variables below at any scope you like.
+ *
+ * All variables are listed under `:root` so a single global override re-themes
+ * every grid on the page; `.dgv-root` re-publishes them so a per-grid override
+ * via inline style or wrapper class works too.
+ */
+
+:root {
+	/* Surface colors */
+	--dgv-color-bg: #ffffff;
+	--dgv-color-bg-alt: #fafafa;
+	--dgv-color-bg-hover: #f3f3f3;
+	--dgv-color-bg-selected: #e5f1fb;
+	--dgv-color-bg-overlay: rgba(0, 0, 0, 0.32);
+
+	/* Text colors */
+	--dgv-color-fg: #242424;
+	--dgv-color-fg-muted: #616161;
+	--dgv-color-fg-on-accent: #ffffff;
+
+	/* Border + accent */
+	--dgv-color-border: #e1e1e1;
+	--dgv-color-accent: #0f6cbd;
+	--dgv-color-accent-hover: #115ea3;
+
+	/* Radius */
+	--dgv-radius-sm: 2px;
+	--dgv-radius-md: 4px;
+	--dgv-radius-pill: 999px;
+
+	/* Spacing */
+	--dgv-space-1: 2px;
+	--dgv-space-2: 4px;
+	--dgv-space-3: 6px;
+	--dgv-space-4: 8px;
+	--dgv-space-5: 12px;
+	--dgv-space-6: 16px;
+
+	/* Sizing */
+	--dgv-row-height: 36px;
+	--dgv-control-height: 28px;
+
+	/* Typography */
+	--dgv-font-family: inherit;
+	--dgv-font-size-sm: 12px;
+	--dgv-font-size-md: 14px;
+
+	/* Elevation */
+	--dgv-shadow-popover: 0 4px 12px rgba(0, 0, 0, 0.08);
+	--dgv-shadow-drawer: -4px 0 16px rgba(0, 0, 0, 0.12);
+}
+
+.dgv-root {
+	/* Aliases used by the rest of this stylesheet. Kept for back-compat with
+	 * existing rules; they are derived from the public tokens above. */
+	--dgv-border: var(--dgv-color-border);
+	--dgv-bg: var(--dgv-color-bg);
+	--dgv-bg-alt: var(--dgv-color-bg-alt);
+	--dgv-bg-hover: var(--dgv-color-bg-hover);
+	--dgv-bg-selected: var(--dgv-color-bg-selected);
+	--dgv-fg: var(--dgv-color-fg);
+	--dgv-fg-muted: var(--dgv-color-fg-muted);
+	--dgv-accent: var(--dgv-color-accent);
+	--dgv-radius: var(--dgv-radius-md);
+	--dgv-row-h: var(--dgv-row-height);
+	--dgv-pad-x: var(--dgv-space-5);
+
+	color: var(--dgv-fg);
+	font-family: var(--dgv-font-family);
+	font-size: var(--dgv-font-size-md);
+	line-height: 1.4;
+}
+
+.dgv-toolbar,
+.dgv-footer {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 12px;
+	flex-wrap: wrap;
+	background: var(--dgv-bg-alt);
+	border: 1px solid var(--dgv-border);
+}
+
+.dgv-toolbar {
+	border-radius: var(--dgv-radius) var(--dgv-radius) 0 0;
+	border-bottom: 0;
+}
+
+.dgv-footer {
+	border-radius: 0 0 var(--dgv-radius) var(--dgv-radius);
+	border-top: 0;
+}
+
+/* When the toolbar/footer wrap the scroll area, the scroll area's own
+ * border would double up. Flatten the corresponding edges. */
+.dgv-toolbar + .dgv-scroll {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+.dgv-scroll:has(+ .dgv-footer) {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	border-bottom: 0;
+}
+
+.dgv-toolbar-group {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.dgv-toolbar-group--left {
+	margin-inline-end: auto;
+}
+
+.dgv-toolbar-group--right {
+	margin-inline-start: auto;
+}
+
+.dgv-subtoolbar {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 4px 2px;
+	color: var(--dgv-fg-muted);
+	font-size: 12px;
+}
+
+.dgv-scroll {
+	overflow: auto;
+	border: 1px solid var(--dgv-border);
+	border-radius: var(--dgv-radius);
+	background: var(--dgv-bg);
+	scrollbar-color: var(--dgv-fg-muted) var(--dgv-bg-alt);
+	scrollbar-width: thin;
+}
+
+.dgv-scroll::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+.dgv-scroll::-webkit-scrollbar-track {
+	background: var(--dgv-bg-alt);
+}
+.dgv-scroll::-webkit-scrollbar-thumb {
+	background: var(--dgv-border);
+	border-radius: 8px;
+	border: 2px solid var(--dgv-bg-alt);
+}
+.dgv-scroll::-webkit-scrollbar-thumb:hover {
+	background: var(--dgv-fg-muted);
+}
+.dgv-scroll::-webkit-scrollbar-corner {
+	background: var(--dgv-bg-alt);
+}
+
+/* Apply the same themed scrollbar to internal scrollers like popovers and
+ * menu lists so they don't fall back to OS default chrome (which renders
+ * as oversized black bars on some platforms). */
+.dgv-popover,
+.dgv-colvis-menu,
+.dgv-filter-checkboxes,
+.dgv-drawer-body {
+	scrollbar-color: var(--dgv-fg-muted) var(--dgv-bg-alt);
+	scrollbar-width: thin;
+}
+
+.dgv-popover::-webkit-scrollbar,
+.dgv-colvis-menu::-webkit-scrollbar,
+.dgv-filter-checkboxes::-webkit-scrollbar,
+.dgv-drawer-body::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+.dgv-popover::-webkit-scrollbar-track,
+.dgv-colvis-menu::-webkit-scrollbar-track,
+.dgv-filter-checkboxes::-webkit-scrollbar-track,
+.dgv-drawer-body::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.dgv-popover::-webkit-scrollbar-thumb,
+.dgv-colvis-menu::-webkit-scrollbar-thumb,
+.dgv-filter-checkboxes::-webkit-scrollbar-thumb,
+.dgv-drawer-body::-webkit-scrollbar-thumb {
+	background: var(--dgv-border);
+	border-radius: 8px;
+}
+
+.dgv-popover::-webkit-scrollbar-thumb:hover,
+.dgv-colvis-menu::-webkit-scrollbar-thumb:hover,
+.dgv-filter-checkboxes::-webkit-scrollbar-thumb:hover,
+.dgv-drawer-body::-webkit-scrollbar-thumb:hover {
+	background: var(--dgv-fg-muted);
+}
+
+.dgv-table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	table-layout: auto;
+}
+
+.dgv-thead {
+	position: sticky;
+	top: 0;
+	z-index: 1;
+	background: var(--dgv-bg-alt);
+}
+
+.dgv-th,
+.dgv-td {
+	padding: 0 var(--dgv-pad-x);
+	height: var(--dgv-row-h);
+	border-bottom: 1px solid var(--dgv-border);
+	text-align: start;
+	vertical-align: middle;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.dgv-th {
+	font-weight: 600;
+	color: var(--dgv-fg);
+	user-select: none;
+}
+
+.dgv-th--align-center,
+.dgv-td--align-center {
+	text-align: center;
+}
+.dgv-th--align-end,
+.dgv-td--align-end {
+	text-align: end;
+}
+
+.dgv-tr:hover .dgv-td {
+	background: var(--dgv-bg-hover);
+}
+
+.dgv-tr--selected .dgv-td {
+	background: var(--dgv-bg-selected);
+}
+
+.dgv-th--select,
+.dgv-td--select {
+	width: 36px;
+	min-width: 36px;
+	text-align: center;
+	padding: 0 4px;
+}
+
+.dgv-th-button {
+	all: unset;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	cursor: pointer;
+	width: 100%;
+	height: 100%;
+}
+
+.dgv-th-button:focus-visible {
+	outline: 2px solid var(--dgv-accent);
+	outline-offset: -2px;
+}
+
+.dgv-sort-indicator {
+	font-size: 10px;
+	color: var(--dgv-fg-muted);
+}
+
+.dgv-empty {
+	text-align: center;
+	color: var(--dgv-fg-muted);
+	padding: 24px;
+	font-style: italic;
+}
+
+.dgv-group-row .dgv-td {
+	background: var(--dgv-bg-alt);
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.dgv-group-toggle {
+	display: inline-block;
+	width: 14px;
+	color: var(--dgv-fg-muted);
+}
+
+.dgv-input,
+.dgv-select {
+	font: inherit;
+	color: inherit;
+	background: var(--dgv-bg);
+	border: 1px solid var(--dgv-border);
+	border-radius: var(--dgv-radius);
+	padding: 4px 8px;
+	height: 28px;
+	box-sizing: border-box;
+	transition:
+		border-color 120ms ease,
+		box-shadow 120ms ease;
+}
+
+.dgv-select {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	padding-inline-end: 26px;
+	cursor: pointer;
+	background-color: var(--dgv-bg);
+	color: var(--dgv-fg);
+	/* Caret is masked from a tiny SVG so it inherits color from the select. */
+	background-image: linear-gradient(transparent, transparent);
+	background-repeat: no-repeat;
+}
+
+.dgv-select::-ms-expand {
+	display: none;
+}
+
+/* Render the caret on top via a wrapper-free pseudo. The select itself
+ * doesn't support ::after, so we paint the caret using a CSS mask on the
+ * background. We use two backgrounds: the (transparent) gradient above
+ * keeps the bg color, and the mask layer paints the chevron in fg color. */
+.dgv-select {
+	-webkit-mask-image: none;
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none'><path d='M6 8.5 1.5 4h9z' fill='%23616161'/></svg>");
+	background-position: right 8px center;
+	background-size: 10px 10px;
+}
+
+[data-dgv-theme="dark"] .dgv-select,
+.dgv-root[data-dgv-theme="dark"] .dgv-select {
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none'><path d='M6 8.5 1.5 4h9z' fill='%23a6a6a6'/></svg>");
+}
+
+.dgv-input:hover:not(:disabled),
+.dgv-select:hover:not(:disabled) {
+	border-color: var(--dgv-fg-muted);
+}
+
+.dgv-input:focus-visible,
+.dgv-select:focus-visible {
+	outline: none;
+	border-color: var(--dgv-accent);
+	box-shadow: 0 0 0 2px color-mix(in srgb, var(--dgv-accent) 25%, transparent);
+}
+
+.dgv-button {
+	font: inherit;
+	color: inherit;
+	background: var(--dgv-bg);
+	border: 1px solid var(--dgv-border);
+	border-radius: var(--dgv-radius);
+	padding: 4px 10px;
+	height: 28px;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 4px;
+	transition:
+		background-color 120ms ease,
+		border-color 120ms ease,
+		box-shadow 120ms ease;
+}
+
+.dgv-button:hover:not(:disabled) {
+	background: var(--dgv-bg-hover);
+	border-color: var(--dgv-fg-muted);
+}
+
+.dgv-button:active:not(:disabled) {
+	background: var(--dgv-bg-alt);
+}
+
+.dgv-button:focus-visible {
+	outline: none;
+	border-color: var(--dgv-accent);
+	box-shadow: 0 0 0 2px color-mix(in srgb, var(--dgv-accent) 25%, transparent);
+}
+
+.dgv-button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.dgv-button--primary {
+	background: var(--dgv-accent);
+	color: var(--dgv-color-fg-on-accent);
+	border-color: var(--dgv-accent);
+}
+
+.dgv-button--primary:hover:not(:disabled) {
+	background: var(--dgv-color-accent-hover);
+	border-color: var(--dgv-color-accent-hover);
+}
+
+.dgv-button--subtle {
+	background: transparent;
+	border-color: transparent;
+}
+
+.dgv-button--subtle:hover:not(:disabled) {
+	background: var(--dgv-bg-hover);
+	border-color: transparent;
+}
+
+.dgv-icon-button {
+	width: 28px;
+	padding: 0;
+	color: var(--dgv-fg-muted);
+}
+
+.dgv-icon-button:hover:not(:disabled) {
+	color: var(--dgv-fg);
+}
+
+/* ---------- Native checkbox (custom-painted, theme-aware) ---------- */
+
+.dgv-checkbox {
+	appearance: none;
+	-webkit-appearance: none;
+	margin: 0;
+	width: 16px;
+	height: 16px;
+	flex-shrink: 0;
+	border: 1.5px solid var(--dgv-fg-muted);
+	border-radius: var(--dgv-radius-sm);
+	background: var(--dgv-bg);
+	cursor: pointer;
+	position: relative;
+	transition:
+		background-color 120ms ease,
+		border-color 120ms ease,
+		box-shadow 120ms ease;
+	vertical-align: middle;
+}
+
+.dgv-checkbox:hover:not(:disabled) {
+	border-color: var(--dgv-accent);
+}
+
+.dgv-checkbox:checked,
+.dgv-checkbox:indeterminate {
+	background: var(--dgv-accent);
+	border-color: var(--dgv-accent);
+}
+
+.dgv-checkbox:checked::after {
+	content: "";
+	position: absolute;
+	left: 4px;
+	top: 0px;
+	width: 5px;
+	height: 9px;
+	border: solid var(--dgv-color-fg-on-accent);
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+}
+
+.dgv-checkbox:indeterminate::after {
+	content: "";
+	position: absolute;
+	left: 3px;
+	right: 3px;
+	top: 50%;
+	height: 2px;
+	margin-top: -1px;
+	background: var(--dgv-color-fg-on-accent);
+	border-radius: 1px;
+}
+
+.dgv-checkbox:focus-visible {
+	outline: none;
+	box-shadow: 0 0 0 2px color-mix(in srgb, var(--dgv-accent) 25%, transparent);
+}
+
+.dgv-checkbox:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.dgv-search-input {
+	min-width: 220px;
+}
+
+.dgv-tag {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	background: var(--dgv-bg-alt);
+	border: 1px solid var(--dgv-border);
+	border-radius: 999px;
+	padding: 2px 8px;
+	font-size: 12px;
+}
+
+.dgv-tag-close {
+	all: unset;
+	cursor: pointer;
+	color: var(--dgv-fg-muted);
+}
+
+.dgv-tag-close:hover {
+	color: var(--dgv-fg);
+}
+
+.dgv-footer .dgv-toolbar-group--left {
+	flex: 1 1 auto;
+}
+
+.dgv-pager {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-inline-start: auto;
+	flex: 1 1 auto;
+	justify-content: space-between;
+}
+
+.dgv-pager-info,
+.dgv-pager-nav {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.dgv-pager-rows {
+	display: inline-flex;
+	gap: 6px;
+	align-items: center;
+}
+
+.dgv-spacer {
+	flex: 1 1 auto;
+}
+
+.dgv-footer-status {
+	color: var(--dgv-fg-muted);
+	font-size: 12px;
+}
+
+.dgv-status {
+	color: var(--dgv-fg-muted);
+	font-size: 12px;
+	white-space: nowrap;
+	padding-inline: 4px;
+}
+
+/* ---------- filter ---------- */
+
+.dgv-filter-header {
+	position: relative;
+	display: inline-flex;
+	gap: 4px;
+	align-items: center;
+}
+
+.dgv-filter-toggle {
+	width: 20px;
+	justify-content: center;
+}
+
+.dgv-filter-toggle[data-active] {
+	color: var(--dgv-accent);
+}
+
+.dgv-filter-popover,
+.dgv-popover {
+	position: fixed;
+	z-index: 1001;
+	background: var(--dgv-bg);
+	border: 1px solid var(--dgv-border);
+	border-radius: var(--dgv-radius);
+	min-width: 220px;
+	max-height: 320px;
+	overflow: auto;
+	box-shadow: var(--dgv-shadow-popover);
+}
+
+.dgv-popover-backdrop {
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+}
+
+.dgv-spinner {
+	display: inline-block;
+	border: 2px solid var(--dgv-border);
+	border-top-color: var(--dgv-accent);
+	border-radius: 50%;
+	animation: dgv-spin 720ms linear infinite;
+}
+
+@keyframes dgv-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.dgv-icon {
+	display: inline-flex;
+	line-height: 1;
+}
+
+.dgv-filter-editor {
+	padding: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.dgv-filter-checkboxes {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.dgv-filter-check {
+	display: flex;
+	gap: 6px;
+	align-items: center;
+	font-weight: 400;
+	font-size: 13px;
+}
+
+.dgv-filter-actions {
+	display: flex;
+	gap: 6px;
+}
+
+/* ---------- filter drawer (overlay) ---------- */
+
+.dgv-drawer-backdrop {
+	position: fixed;
+	inset: 0;
+	background: var(--dgv-color-bg-overlay);
+	z-index: 999;
+	animation: dgv-fade-in 120ms ease-out;
+}
+
+.dgv-drawer {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: min(420px, 92vw);
+	background: var(--dgv-bg);
+	border-left: 1px solid var(--dgv-border);
+	box-shadow: var(--dgv-shadow-drawer);
+	z-index: 1000;
+	display: flex;
+	flex-direction: column;
+	animation: dgv-slide-in 160ms ease-out;
+}
+
+.dgv-drawer-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 16px;
+	border-bottom: 1px solid var(--dgv-border);
+}
+
+.dgv-drawer-head h3 {
+	margin: 0;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.dgv-drawer-body {
+	flex: 1 1 auto;
+	overflow-y: auto;
+	padding: 12px 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.dgv-drawer-foot {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 16px;
+	border-top: 1px solid var(--dgv-border);
+	background: var(--dgv-bg-alt);
+}
+
+@keyframes dgv-fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes dgv-slide-in {
+	from {
+		transform: translateX(100%);
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+
+.dgv-filter-panel-section {
+	border: 1px solid var(--dgv-border);
+	border-radius: var(--dgv-radius);
+	padding: 4px 8px;
+	background: var(--dgv-bg-alt);
+}
+
+.dgv-filter-panel-section > summary {
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 13px;
+	padding: 4px 0;
+	user-select: none;
+}
+
+.dgv-filter-panel-section .dgv-filter-editor {
+	padding: 4px 0 8px;
+}
+
+.dgv-filter-panel-section .dgv-filter-checkboxes {
+	max-height: 160px;
+	overflow: auto;
+}
+
+/* ---------- Loading skeleton ---------- */
+
+.dgv-tr--skeleton .dgv-td {
+	padding: 8px 12px;
+}
+
+.dgv-skeleton-bar {
+	display: block;
+	height: 12px;
+	border-radius: var(--dgv-radius-sm);
+	background: linear-gradient(
+		90deg,
+		var(--dgv-bg-alt) 0%,
+		var(--dgv-bg-hover) 50%,
+		var(--dgv-bg-alt) 100%
+	);
+	background-size: 200% 100%;
+	animation: dgv-skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+.dgv-loading {
+	text-align: center;
+	color: var(--dgv-fg-muted);
+	padding: 24px;
+}
+
+@keyframes dgv-skeleton-shimmer {
+	0% {
+		background-position: 200% 0;
+	}
+	100% {
+		background-position: -200% 0;
+	}
+}
+
+/* ---------- Virtual scroll spacer rows ---------- */
+
+.dgv-tr--virtual-spacer {
+	background: transparent;
+}
+.dgv-tr--virtual-spacer:hover {
+	background: transparent;
+}
+.dgv-td--virtual-spacer {
+	padding: 0;
+	border: 0;
+	background: transparent;
+}
+
+/* ---------- Column resize ---------- */
+
+.dgv-th {
+	position: relative;
+}
+
+.dgv-resize-handle {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 6px;
+	height: 100%;
+	cursor: col-resize;
+	user-select: none;
+	background: transparent;
+	transition: background-color 120ms ease;
+}
+
+.dgv-resize-handle:hover,
+.dgv-resize-handle--active {
+	background: var(--dgv-accent);
+	opacity: 0.5;
+}
+
+.dgv-root.dgv-root--resizing,
+.dgv-root.dgv-root--resizing * {
+	cursor: col-resize !important;
+	user-select: none !important;
+}
+
+/* ---------- Column visibility menu ---------- */
+
+.dgv-colvis-menu {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	min-width: 200px;
+	padding: 4px;
+}
+
+.dgv-colvis-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 4px 6px;
+	border-radius: var(--dgv-radius);
+	cursor: pointer;
+	font-size: 13px;
+}
+
+.dgv-colvis-item:hover {
+	background: var(--dgv-bg-hover);
+}
+
+.dgv-colvis-item--all {
+	font-weight: 600;
+	border-bottom: 1px solid var(--dgv-border);
+	padding-bottom: 6px;
+	margin-bottom: 2px;
+}
+
+.dgv-colvis-item[data-required] {
+	color: var(--dgv-fg-muted);
+	cursor: not-allowed;
+}
+
+.dgv-colvis-actions {
+	display: flex;
+	justify-content: space-between;
+	gap: 6px;
+	padding-top: 6px;
+	margin-top: 4px;
+	border-top: 1px solid var(--dgv-border);
+}
+
+/* ---------- Multi-level group chips ---------- */
+
+.dgv-group-chips {
+	display: inline-flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+
+/* ---------- Density presets ---------- */
+
+.dgv-root--density-compact {
+	--dgv-row-h: 28px;
+	--dgv-pad-x: var(--dgv-space-4);
+	--dgv-control-height: 24px;
+	font-size: var(--dgv-font-size-sm);
+}
+
+.dgv-root--density-comfortable {
+	--dgv-row-h: 36px;
+}
+
+.dgv-root--density-spacious {
+	--dgv-row-h: 44px;
+	--dgv-pad-x: var(--dgv-space-6);
+}
+
+/* ---------- Expandable rows ---------- */
+
+.dgv-td--expand,
+.dgv-th--expand {
+	width: 32px;
+	min-width: 32px;
+	padding: 0 4px;
+	text-align: center;
+}
+
+.dgv-tr--expanded > .dgv-td {
+	background: var(--dgv-bg-alt);
+}
+
+.dgv-tr--detail > .dgv-td {
+	background: var(--dgv-bg-alt);
+	white-space: normal;
+	padding: 8px var(--dgv-pad-x);
+}
+
+.dgv-expand-toggle {
+	all: unset;
+	cursor: pointer;
+	color: var(--dgv-fg-muted);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	border-radius: var(--dgv-radius-sm);
+}
+
+.dgv-expand-toggle:hover {
+	background: var(--dgv-bg-hover);
+	color: var(--dgv-fg);
+}
+
+.dgv-expand-toggle:focus-visible {
+	outline: 2px solid var(--dgv-accent);
+	outline-offset: -2px;
+}
+
+/* ---------- A11y live region ---------- */
+
+.dgv-sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* ---------- Toolbar action buttons ---------- */
+
+.dgv-action-button {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+}
+
+/* ---------- Multi-sort menu ---------- */
+
+.dgv-sort-menu {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	min-width: 240px;
+	padding: 6px;
+}
+
+.dgv-sort-row {
+	display: grid;
+	grid-template-columns: 1fr auto auto auto;
+	gap: 4px;
+	align-items: center;
+}
+
+.dgv-sort-empty {
+	color: var(--dgv-fg-muted);
+	font-style: italic;
+	padding: 4px 6px;
+}
+
+.dgv-sort-actions {
+	display: flex;
+	justify-content: space-between;
+	gap: 6px;
+	padding-top: 6px;
+	margin-top: 4px;
+	border-top: 1px solid var(--dgv-border);
+}
+
+/* ---------- Group by menu ---------- */
+
+.dgv-groupby-menu {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	min-width: 220px;
+	padding: 8px;
+}
+
+.dgv-groupby-empty {
+	color: var(--dgv-fg-muted);
+	font-style: italic;
+	padding: 4px 6px;
+}
+
+.dgv-groupby-row {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.dgv-groupby-name {
+	flex: 1 1 auto;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* ---------- Responsive ----------
+ *
+ * The table itself is already horizontally scrollable via `.dgv-scroll`.
+ * The rules below adjust the chrome (toolbar, footer, pager, drawer) for
+ * narrower viewports.
+ */
+
+/* Tablet and below: stack toolbar/footer groups, let search input fill row. */
+@media (max-width: 768px) {
+	.dgv-toolbar,
+	.dgv-footer {
+		flex-direction: column;
+		align-items: stretch;
+	}
+	.dgv-toolbar-group--left,
+	.dgv-toolbar-group--right {
+		margin-inline-start: 0;
+		margin-inline-end: 0;
+		width: 100%;
+		justify-content: flex-start;
+	}
+	.dgv-search-input {
+		min-width: 0;
+		flex: 1 1 auto;
+		width: 100%;
+	}
+	.dgv-pager {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 6px;
+	}
+	.dgv-pager-info,
+	.dgv-pager-nav {
+		justify-content: space-between;
+	}
+	.dgv-drawer {
+		width: 100vw;
+	}
+}
+
+/* Phone: tighten density automatically and shrink padding. */
+@media (max-width: 480px) {
+	.dgv-root {
+		--dgv-row-h: 32px;
+		--dgv-pad-x: var(--dgv-space-4);
+		font-size: var(--dgv-font-size-sm);
+	}
+	.dgv-popover {
+		min-width: 0;
+		max-width: calc(100vw - 16px);
+	}
+	/* Drop the leading row-number / select column padding a little to claim
+	 * back horizontal space. The cells still exist; just less padded. */
+	.dgv-th--select,
+	.dgv-td--select {
+		width: 32px;
+		min-width: 32px;
+	}
+
+	/* Toolbar action buttons (Filters, Sort, Columns, etc.): hide their text
+	 * labels and show only the icon. Buttons keep their accessible name via
+	 * aria-label. The text is wrapped in `.dgv-button-label` so we can hide
+	 * it cleanly without affecting nested icons. */
+	.dgv-action-button .dgv-button-label {
+		display: none;
+	}
+	.dgv-action-button {
+		width: 32px;
+		min-width: 32px;
+		padding: 0 6px;
+		justify-content: center;
+		gap: 0;
+	}
+
+	/* Pager nav buttons: equal-size square buttons, spread across the row. */
+	.dgv-pager-nav {
+		justify-content: space-between;
+		gap: 4px;
+	}
+	.dgv-pager-nav .dgv-button {
+		width: 32px;
+		min-width: 32px;
+		padding: 0;
+		justify-content: center;
+	}
+
+	/* Pager rows-per-page selector should not push other items off screen. */
+	.dgv-pager-info {
+		flex-wrap: wrap;
+	}
+	.dgv-pager-rows .dgv-select {
+		min-width: 56px;
+	}
+}
