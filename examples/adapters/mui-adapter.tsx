@@ -44,7 +44,7 @@ import type {
 	IDataGridSelectProps,
 	IDataGridSpinnerProps,
 	IDataGridTagProps,
-} from "../../components/data-grid";
+} from "@techtrips/ui-controls";
 
 const ICONS: Record<
 	IDataGridIconName,

@@ -4,8 +4,10 @@
 		"declaration": true,
 		"declarationMap": false
 	},
+	"include": ["src"],
 	"exclude": [
 		"public",
+		"examples",
 		"./src/components/common/layout",
 		"./src/App.tsx",
 		"./src/App.css",

@@ -23,7 +23,15 @@
 		/* type checking */
 		"strict": true,
 		"noUnusedLocals": true,
-		"noUnusedParameters": true
+		"noUnusedParameters": true,
+
+		/* path aliases — let the playground & examples import the library
+		 * by its published name so example files double as copy-paste-ready
+		 * source for consumers. */
+		"baseUrl": ".",
+		"paths": {
+			"@techtrips/ui-controls": ["src/index.ts"]
+		}
 	},
-	"include": ["src"]
+	"include": ["src", "examples"]
 }

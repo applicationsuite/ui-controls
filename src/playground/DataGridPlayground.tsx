@@ -16,9 +16,9 @@ import {
 	type IDataGridPlugin,
 } from "../components/data-grid";
 import { generatePeople, type IPerson } from "./data";
-import { fluentAdapter } from "./adapters/fluent";
-import { materialLikeAdapter } from "./adapters/material-like";
-import { muiAdapter } from "./adapters/mui";
+import { fluentAdapter } from "../../examples/adapters/fluent-adapter";
+import { materialLikeAdapter } from "../../examples/adapters/material-like-adapter";
+import { muiAdapter } from "../../examples/adapters/mui-adapter";
 
 type PagingMode = "none" | "pagination" | "infinite";
 type Mode = "client" | "server";

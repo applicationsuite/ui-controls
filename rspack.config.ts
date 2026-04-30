@@ -19,6 +19,11 @@ export default defineConfig({
 	},
 	resolve: {
 		extensions: ["...", ".ts", ".tsx", ".jsx"],
+		alias: {
+			// Let example/playground files import the library by its
+			// published name; resolves to the in-repo source.
+			"@techtrips/ui-controls": require.resolve("./src/index.ts"),
+		},
 	},
 	module: {
 		rules: [

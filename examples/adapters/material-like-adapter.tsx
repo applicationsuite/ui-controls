@@ -11,7 +11,7 @@ import type {
 	IDataGridSelectProps,
 	IDataGridSpinnerProps,
 	IDataGridTagProps,
-} from "../../components/data-grid";
+} from "@techtrips/ui-controls";
 import "./material-like.css";
 
 /**
